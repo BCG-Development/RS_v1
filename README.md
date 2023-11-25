@@ -74,7 +74,7 @@ Explore the functionalities provided by Route Solutions:
 
 Refer to the application structure and logging details in the previous sections for insights into its inner workings.
 
-Now you’re ready to interact with Route Solutions. Head to the [Getting Started](#getting-started) section to run the application.
+Now you’re ready to interact with Route Solutions. Head to the [Getting Started](#installation) section to run the application.
 
 ## Contributing
 
