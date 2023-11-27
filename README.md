@@ -1,6 +1,6 @@
 # Route Solutions
 
-**Route Solutions** is a software solution designed for managing and organizing store information. This application facilitates tasks such as inserting individual stores, importing multiple stores from Excel files, and efficiently deleting store records based on specified criteria or removing all stores.
+**Route Solutions** is a software solution designed for managing and organizing store information. This application facilitates tasks such as inserting individual stores, importing multiple stores from Excel files, efficiently deleting store records based on specified criteria, removing all stores, and searching for stores by ID.
 
 ## Functionality Overview
 
@@ -16,13 +16,17 @@ Users can streamline the process by importing multiple stores from an Excel file
 
 There are options to delete stores based on specific criteria or remove all stores. Users can delete a single store by providing its ID or choose to delete multiple stores by specifying criteria, such as all stores requiring a tail lift.
 
+### Searching for Stores
+
+Users can search for a store by providing its ID. The application retrieves and displays information for the specified store if it exists.
+
 ### Logging
 
-The application utilizes logging to capture and record events during database interactions, including successful document insertions, deletions, and potential errors.
+The application utilizes logging to capture and record events during database interactions, including successful document insertions, deletions, searches, and potential errors.
 
 ## Logging
 
-The application logs important events and errors during database interactions. Separate loggers are used for different modules, including connection, deletion, and insertion. This ensures a detailed record of activities and aids in troubleshooting.
+The application logs important events and errors during database interactions. Separate loggers are used for different modules, including connection, deletion, insertion, and search. This ensures a detailed record of activities and aids in troubleshooting.
 
 ## Database Structure
 
@@ -30,7 +34,7 @@ The application operates on a MongoDB database named “StoreInformation” with
 
 ## Project Structure
 
-The project is organized into distinct modules for connection handling, insertion, deletion, and logging. The structure promotes code readability, maintainability, and the ease of extending functionality.
+The project is organized into distinct modules for connection handling, insertion, deletion, searching, and logging. The structure promotes code readability, maintainability, and the ease of extending functionality.
 
 ## Installation
 
@@ -71,6 +75,7 @@ Explore the functionalities provided by Route Solutions:
 - Insert many stores from an Excel file
 - Delete one store by ID
 - Delete many stores based on criteria or all to remove all stores
+- Search for a store by ID
 
 Refer to the application structure and logging details in the previous sections for insights into its inner workings.
 

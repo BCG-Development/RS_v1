@@ -4,6 +4,7 @@ from Database.Connection.ping_connection import connect_to_database
 from Database.Delete.delete_docs import delete_one_document, delete_many_documents
 from Database.InsertOne.insert_one import insert_document
 from Database.InsertMany.insert_many import insert_documents
+from Database.Search.search import search_document_by_id
 
 log_dir = r"RS\Logging\Loggers"
 
@@ -12,13 +13,14 @@ async def main():
     Main function for the Route Solutions application.
 
     This function presents a menu to the user, allowing them to perform various operations
-    related to inserting and deleting store information from a MongoDB database.
+    related to inserting, deleting, and searching store information from a MongoDB database.
 
     Operations:
     1. Insert one store
     2. Insert many stores from Excel
     3. Delete one store by ID
     4. Delete many stores based on criteria or all to remove all stores
+    5. Search for a store by ID
     """
 
     # Connect to the MongoDB database
@@ -31,12 +33,13 @@ async def main():
             print("2. Insert many stores from Excel")
             print("3. Delete one store by ID")
             print("4. Delete many stores based on criteria or all to remove all stores")
+            print("5. Search for a store by ID")
 
             # Get user choice
-            choice = input("Enter your choice (1, 2, 3, or 4): ")
+            choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
 
-            if not choice.isdigit() or choice not in ['1', '2', '3', '4']:
-                raise ValueError("Invalid input. Please enter 1, 2, 3, or 4.")
+            if not choice.isdigit() or choice not in ['1', '2', '3', '4', '5']:
+                raise ValueError("Invalid input. Please enter 1, 2, 3, 4, or 5.")
 
             if choice == '1':
                 # Insert one store
@@ -89,8 +92,18 @@ async def main():
                 else:
                     # Delete based on user-defined criteria
                     await delete_instance.delete_many_documents(criteria_or_all)
+
+            elif choice == '5':
+                # Search for a store by ID
+                document_id = input("Enter the ID of the store to search: ")
+                result = await search_document_by_id(document_id)
+                if result:
+                    print(f"Store found: {result}")
+                else:
+                    print(f"No store found with ID: {document_id}")
+
             else:
-                print("Invalid choice. Please enter 1, 2, 3, or 4.")
+                print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
 
             # Ask the user if they want to input another operation
             another_operation = input("Do you want to perform another operation? (y/n): ").lower()
