@@ -11,15 +11,15 @@ load_dotenv()
 uri = os.getenv("MONGO_CONNECTION_STRING")
 
 # Initialize a logger for the search module
-search_logger = logging.getLogger("search_logger")
-search_logger.setLevel(logging.DEBUG)
+search_one_logger = logging.getLogger("search_one_logger")
+search_one_logger.setLevel(logging.DEBUG)
 
-async def search_document_by_id(document_id):
+async def search_one(document_id):
     """
     Search for a document in the 'Stores' collection by ID.
 
     Args:
-    - document_id: The ID of the document to search for.
+    - document_id (int): The ID of the document to search for.
 
     Returns:
     - dict: The document if found, None otherwise.
@@ -42,23 +42,23 @@ async def search_document_by_id(document_id):
         result = await collection.find_one({"_id": document_id})
 
         if result:
-            search_logger.info(f"Document found with ID {document_id}")
+            search_one_logger.info(f"Document found with ID {document_id}")
             return result
         else:
-            search_logger.warning(f"No document found with ID {document_id}")
+            search_one_logger.warning(f"No document found with ID {document_id}")
             return None
 
     except PyMongoError as pe:
         # Log MongoDB-specific errors
-        search_logger.error(f"MongoDB error: {pe}")
+        search_one_logger.error(f"MongoDB error: {pe}")
         return None
     except Exception as e:
         # Log unexpected errors
-        search_logger.error(f"Unexpected error: {e}")
+        search_one_logger.error(f"Unexpected error: {e}")
         return None
 
     finally:
         # Close the MongoDB client and log closure attempt
         if client:
             client.close()
-            search_logger.info("MongoDB client closed successfully.")
+            search_one_logger.info("MongoDB client closed successfully.")
