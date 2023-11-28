@@ -35,17 +35,18 @@ def validate_tail_lift(tail_lift):
         return False
     return True
 
-async def insert_document(id, store_name, store_address, store_postcode, kms, tail_lift):
+async def insert_document(id, store_name, store_address, store_postcode, kms, tail_lift, store_restrictions):
     """
     Insert a single document into the 'Stores' collection.
 
     Args:
-    - id: The ID of the store.
-    - store_name: The name of the store.
-    - store_address: The address of the store.
-    - store_postcode: The postcode of the store.
-    - kms: The kilometers value.
-    - tail_lift: The tail lift requirement (True or False).
+    - id (str): The ID of the store.
+    - store_name (str): The name of the store.
+    - store_address (str): The address of the store.
+    - store_postcode (str): The postcode of the store.
+    - kms (float): The kilometers value.
+    - tail_lift (bool): The tail lift requirement (True or False).
+    - store_restrictions (dict): Store restrictions for each day of the week.
 
     Raises:
     - PyMongoError: If an error occurs during the MongoDB operation.
@@ -68,7 +69,8 @@ async def insert_document(id, store_name, store_address, store_postcode, kms, ta
             "Store Address": store_address,
             "Store Postcode": store_postcode,
             "Kilometers": kms,
-            "Does the store require a tail lift? (True/False)": bool(tail_lift)
+            "Does the store require a tail lift? (True/False)": bool(tail_lift),
+            "Store Restrictions": store_restrictions
         }
 
         # Insert the document

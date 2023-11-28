@@ -6,6 +6,7 @@ from Database.InsertOne.insert_one import insert_document
 from Database.InsertMany.insert_many import insert_documents
 from Database.SearchOne.search_one import search_one
 from Database.SearchAll.search_all import search_all
+from Database.Modify.modify import modify_document
 
 log_dir = r"RS\Logging\Loggers"
 
@@ -14,7 +15,7 @@ async def main():
     Main function for the Route Solutions application.
 
     This function presents a menu to the user, allowing them to perform various operations
-    related to inserting, deleting, and searching store information from a MongoDB database.
+    related to inserting, deleting, searching, and modifying store information from a MongoDB database.
 
     Operations:
     1. Insert one store
@@ -23,6 +24,7 @@ async def main():
     4. Delete many stores based on criteria or all to remove all stores
     5. Search for a store by ID
     6. Search for all stores
+    7. Modify store restrictions for an existing store  # Added new option
     """
 
     # Connect to the MongoDB database
@@ -37,12 +39,13 @@ async def main():
             print("4. Delete many stores based on criteria or all to remove all stores")
             print("5. Search for a store by ID")
             print("6. Search for all stores")
+            print("7. Modify store restrictions for an existing store")  # Added new option
 
             # Get user choice
-            choice = input("Enter your choice (1, 2, 3, 4, 5, or 6): ")
+            choice = input("Enter your choice (1, 2, 3, 4, 5, 6, or 7): ")
 
-            if not choice.isdigit() or choice not in ['1', '2', '3', '4', '5', '6']:
-                raise ValueError("Invalid input. Please enter 1, 2, 3, 4, 5, or 6.")
+            if not choice.isdigit() or choice not in ['1', '2', '3', '4', '5', '6', '7']:
+                raise ValueError("Invalid input. Please enter 1, 2, 3, 4, 5, 6, or 7.")
 
             if choice == '1':
                 # Insert one store
@@ -52,6 +55,10 @@ async def main():
                 store_postcode_value = input("Enter store postcode: ")
                 kms_value = float(input("Enter KMS: "))
                 tail_lift_value = input("Does the store require a tail lift? (True/False): ").lower() == "true"
+                store_restrictions = {}
+                for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
+                    opening_hours = input(f"Enter opening hours for {day} (e.g., 09:00 AM - 05:00 PM): ")
+                    store_restrictions[day] = opening_hours
 
                 await insert_document(
                     id=id_value,
@@ -59,7 +66,8 @@ async def main():
                     store_address=store_address_value,
                     store_postcode=store_postcode_value,
                     kms=kms_value,
-                    tail_lift=tail_lift_value
+                    tail_lift=tail_lift_value,
+                    store_restrictions=store_restrictions
                 )
 
             elif choice == '2':
@@ -109,6 +117,14 @@ async def main():
                     print(f"Store Postcode: {result['Store Postcode']}")
                     print(f"Kilometers: {result['Kilometers']}")
                     print(f"Does the store require a tail lift? {result['Does the store require a tail lift? (True/False)']}")
+                    
+                    # Print Store Restrictions if present
+                    store_restrictions = result.get('Store Restrictions', {})
+                    if store_restrictions:
+                        print("Store Restrictions:")
+                        for day, hours in store_restrictions.items():
+                            print(f"{day}: {hours}")
+                    
                     print("-" * 30)
                 else:
                     print(f"No store found with ID: {document_id}")
@@ -126,9 +142,35 @@ async def main():
                         print(f"Store Postcode: {store['Store Postcode']}")
                         print(f"Kilometers: {store['Kilometers']}")
                         print(f"Does the store require a tail lift? {store['Does the store require a tail lift? (True/False)']}")
+                        
+                        # Print Store Restrictions if present
+                        store_restrictions = store.get('Store Restrictions', {})
+                        if store_restrictions:
+                            print("Store Restrictions:")
+                            for day, hours in store_restrictions.items():
+                                print(f"{day}: {hours}")
+                        
                         print("-" * 30)
                 else:
                     print("No stores found.")
+
+                    
+            elif choice == '7':
+                # Modify store restrictions
+                document_id = input("Enter the ID of the store to modify: ")
+                store_restrictions = {}
+                for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
+                    opening_hours = input(f"Enter opening hours for {day} (e.g., 09:00 AM - 05:00 PM): ")
+                    store_restrictions[day] = opening_hours
+
+                try:
+                    await modify_document(
+                        document_id=document_id,
+                        store_restrictions=store_restrictions
+                    )
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+            
             else:
                 print("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6.")
 

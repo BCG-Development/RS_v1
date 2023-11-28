@@ -1,12 +1,12 @@
 # Route Solutions
 
-**Route Solutions** is a software solution designed for managing and organizing store information. This application facilitates tasks such as inserting individual stores, importing multiple stores from Excel files, efficiently deleting store records based on specified criteria, removing all stores, and searching for stores by ID.
+**Route Solutions** is a software solution designed for managing and organizing store information. This application facilitates tasks such as inserting individual stores, importing multiple stores from Excel files, efficiently deleting store records based on specified criteria, removing all stores, searching for stores by ID, and modifying store restrictions.
 
 ## Functionality Overview
 
 ### Inserting Stores
 
-The application allows users to add individual stores by providing store-specific details such as ID, name, address, postcode, kilometers, and whether the store requires a tail lift.
+The application allows users to add individual stores by providing store-specific details such as ID, name, address, postcode, kilometers, and whether the store requires a tail lift. Additionally, users can specify store restrictions for each day of the week.
 
 ### Bulk Insertion from Excel
 
@@ -18,23 +18,27 @@ There are options to delete stores based on specific criteria or remove all stor
 
 ### Searching for Stores
 
-Users can search for a store by providing its ID. The application retrieves and displays information for the specified store if it exists.
+Users can search for a store by providing its ID. The application retrieves and displays information for the specified store if it exists. Additionally, users can search for all stores and view their store restrictions.
+
+### Modifying Store Restrictions
+
+Users can modify the store restrictions for an existing store by providing the store ID and updating the opening hours for each day of the week.
 
 ### Logging
 
-The application utilizes logging to capture and record events during database interactions, including successful document insertions, deletions, searches, and potential errors.
+The application utilizes logging to capture and record events during database interactions, including successful document insertions, deletions, searches, modifications, and potential errors.
 
 ## Logging
 
-The application logs important events and errors during database interactions. Separate loggers are used for different modules, including connection, deletion, insertion, and search. This ensures a detailed record of activities and aids in troubleshooting.
+The application logs important events and errors during database interactions. Separate loggers are used for different modules, including connection, deletion, insertion, modification, and search. This ensures a detailed record of activities and aids in troubleshooting.
 
 ## Database Structure
 
-The application operates on a MongoDB database named “StoreInformation” with a collection named “Stores.” Each document in the collection represents a store and includes fields such as ID, store name, address, postcode, kilometers, and tail lift requirement.
+The application operates on a MongoDB database named “StoreInformation” with a collection named “Stores.” Each document in the collection represents a store and includes fields such as ID, store name, address, postcode, kilometers, tail lift requirement, and store restrictions.
 
 ## Project Structure
 
-The project is organized into distinct modules for connection handling, insertion, deletion, searching, and logging. The structure promotes code readability, maintainability, and the ease of extending functionality.
+The project is organized into distinct modules for connection handling, insertion, deletion, searching, modification, and logging. The structure promotes code readability, maintainability, and the ease of extending functionality.
 
 ## Installation
 
@@ -76,6 +80,8 @@ Explore the functionalities provided by Route Solutions:
 - Delete one store by ID
 - Delete many stores based on criteria or all to remove all stores
 - Search for a store by ID
+- Search for all stores
+- Modify store restrictions for an existing store
 
 Refer to the application structure and logging details in the previous sections for insights into its inner workings.
 
