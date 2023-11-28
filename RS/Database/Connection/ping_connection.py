@@ -1,5 +1,4 @@
 import os
-import asyncio
 import logging
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
@@ -64,6 +63,3 @@ async def connect_to_database():
                 connection_logger.error(f"Error closing MongoDB client: {close_error}")
         else:
             connection_logger.warning("MongoDB client was not initialized.")
-
-# Run the connect_to_database coroutine using asyncio.run() as the entry point
-asyncio.run(connect_to_database())

@@ -8,13 +8,16 @@ from Database.InsertMany.insert_many import insert_many_logger
 from Database.SearchOne.search_one import search_one_logger
 from Database.SearchAll.search_all import search_all_logger
 from Database.Modify.modify import modify_logger
+from User.Registration.register import registration_logger
+from User.Login.login import login_logger
 
 def setup_logging(log_dir):
     """
     Set up logging for different components of the Route Solutions application.
 
     This function creates loggers and file handlers for connection, delete, insert_one,
-    insert_many, search_one, search_all, and modify components, configuring them to write log messages to rotating log files.
+    insert_many, search_one, search_all, modify, registration, and login components,
+    configuring them to write log messages to rotating log files.
 
     Parameters:
     - log_dir (str): The directory where log files will be stored.
@@ -67,3 +70,15 @@ def setup_logging(log_dir):
     modify_handler = RotatingFileHandler(modify_log_file, maxBytes=1024 * 1024, backupCount=5)
     modify_handler.setFormatter(formatter)
     modify_logger.addHandler(modify_handler)
+
+    # Configure registration logger
+    registration_log_file = os.path.join(log_dir, "registration_logger.log")
+    registration_handler = RotatingFileHandler(registration_log_file, maxBytes=1024 * 1024, backupCount=5)
+    registration_handler.setFormatter(formatter)
+    registration_logger.addHandler(registration_handler)
+
+    # Configure login logger
+    login_log_file = os.path.join(log_dir, "login_logger.log")
+    login_handler = RotatingFileHandler(login_log_file, maxBytes=1024 * 1024, backupCount=5)
+    login_handler.setFormatter(formatter)
+    login_logger.addHandler(login_handler)

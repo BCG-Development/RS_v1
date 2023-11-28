@@ -1,0 +1,17 @@
+2023-11-28 14:32:21,394 - INFO - Connecting to MongoDB.....
+2023-11-28 14:32:21,805 - INFO -  - StoreInformation
+2023-11-28 14:32:21,806 - INFO -  - UserInformation
+2023-11-28 14:32:21,806 - INFO -  - admin
+2023-11-28 14:32:21,806 - INFO -  - local
+2023-11-28 14:32:21,826 - INFO - 
+Collections in 'StoreInformation':
+2023-11-28 14:32:21,826 - INFO -  - Stores
+2023-11-28 14:32:21,846 - INFO - 
+Collections in 'UserInformation':
+2023-11-28 14:32:21,847 - INFO -  - Users
+2023-11-28 14:32:21,866 - INFO - 
+Collections in 'admin':
+2023-11-28 14:32:21,885 - INFO - 
+Collections in 'local':
+2023-11-28 14:32:21,889 - INFO -  - oplog.rs
+2023-11-28 14:32:21,913 - INFO - MongoDB client closed successfully.
