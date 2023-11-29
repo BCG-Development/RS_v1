@@ -1,1 +1,5 @@
 2023-11-28 14:32:31,377 - INFO - User ASAS successfully registered with ID: 6565f9ffb21b7a5da1fca35e
+2023-11-29 10:13:38,235 - INFO - User ASDF successfully registered with ID: 65670ed2e6f0acf8b135b908
+2023-11-29 10:13:48,313 - ERROR - Username already exists.
+2023-11-29 10:15:34,219 - INFO - User ASDF successfully registered with ID: 65670f46cd4ea24061199ea4
+2023-11-29 10:15:43,725 - ERROR - Username already exists.
