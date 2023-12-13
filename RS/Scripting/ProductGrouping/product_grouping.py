@@ -151,3 +151,25 @@ FP = ProductGrouping(
     warehouse_areas=WarehouseAreas(flowers="Flowers and Plants"),
     warehouse_temp_zones=WarehouseTempZones(flowers_temp_lower=17.0, flowers_temp_upper=11.0)
 )
+
+@dataclass
+class Combinations:
+    """
+    Data class representing combinations of different warehouse areas, product groups, and temperature zones.
+
+    Attributes:
+    - FL (tuple): Combination of A, B, BRD, NF, LO, CH, MILK, CON, MEAT, FRZ, FV, FP.
+    - AZ (tuple): Combination of A, B, NF, LO, FRZ.
+    - FBC (tuple): Combination of CH, MILK, CON, MEAT, BRD, FV, FP.
+    - AFB (tuple): Combination of A, B, BRD, FV, FP, NF, LO.
+    - AC (tuple): Combination of A, B, CH, MILK, CON, MEAT, NF, LO.
+    - CZ (tuple): Combination of CH, MILK, CON, MEAT, FRZ.
+    - FBZ (tuple): Combination of BRD, FV, FP, FRZ.
+    """
+    FL = A, B, BRD, NF, LO, CH, MILK, CON, MEAT, FRZ, FV, FP
+    AZ = A, B, NF, LO, FRZ
+    FBC = CH, MILK, CON, MEAT, BRD, FV, FP
+    AFB = A, B, BRD, FV, FP, NF, LO
+    AC = A, B, CH, MILK, CON, MEAT, NF, LO
+    CZ = CH, MILK, CON, MEAT, FRZ
+    FBZ = BRD, FV, FP, FRZ

@@ -140,8 +140,7 @@ async def main():
                 elif choice == '5':
                     # Delete one store by ID
                     document_id = input("Enter the ID of the store to delete: ")
-                    delete_instance = delete_one_document()
-                    await delete_instance.delete_one_document(document_id)
+                    await delete_one_document(document_id)
 
                 elif choice == '6':
                     # Delete many stores based on criteria or all to remove all stores
